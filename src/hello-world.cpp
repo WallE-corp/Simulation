@@ -1,7 +1,7 @@
 #define OLC_PGE_APPLICATION
 #define OLC_IMAGE_STB
 
-#include "../__dep__/olcPixelGameEngine.h"
+#include "olcPixelGameEngine.h"
 
 // Override base class with your custom functionality
 class Example : public olc::PixelGameEngine
@@ -9,8 +9,7 @@ class Example : public olc::PixelGameEngine
 public:
 	Example()
 	{
-		// Name your application
-		sAppName = "Example";
+		sAppName = "WallE Simulation";
 	}
 
 public:
@@ -33,7 +32,7 @@ public:
 int main()
 {
 	Example demo;
-	if (demo.Construct(256, 240, 4, 4))
+	if (demo.Construct(1080, 720, 2, 2))
 		demo.Start();
 	return 0;
 }
