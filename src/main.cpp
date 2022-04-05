@@ -42,12 +42,44 @@ public:
 
 	bool OnUserUpdate(float fElapsedTime) override
 	{
-		// Called once per frame, draws random coloured pixels
-		for (int x = 0; x < ScreenWidth(); x++)
-			for (int y = 0; y < ScreenHeight(); y++)
-				Draw(x, y, olc::Pixel(rand() % 256, rand() % 256, rand() % 256));
+		// Called once per frame
+
+    float fBlockWidth = 8.0f;
+    float fSourceX = GetMouseX();
+    float fSourceY = GetMouseY();
+
+    // Set tile to on or off
+    if (GetMouse(0).bHeld) {
+      int nTileIndex = GetTileIndex(fSourceX, fSourceY, fBlockWidth);
+      world[nTileIndex].exist = true;
+    }
+    if (GetMouse(1).bHeld) {
+      int nTileIndex = GetTileIndex(fSourceX, fSourceY, fBlockWidth);
+      world[nTileIndex].exist = false;
+    }
+
+
+    // Drawing
+    Clear(olc::BLACK);
+
+    // Draw tiles
+    for (int x = 0; x < nWorldWidth; x++)
+      for (int y = 0; y < nWorldHeight; y++) {
+        if (world[y * nWorldWidth + x].exist) {
+          FillRect(x * fBlockWidth, y * fBlockWidth, fBlockWidth, fBlockWidth, olc::BLUE);
+        }
+      }
+
 		return true;
 	}
+
+  float GetTileIndex(float fSourceX, float fSourceY, float fBlockWidth) {
+    // index = y * width + x
+    int nTileX = (int)(fSourceX / fBlockWidth);
+    int nTileY = (int)(fSourceY / fBlockWidth);
+    int nTileIndex = nTileY * nWorldWidth + nTileX;
+    return nTileIndex;
+  }
 };
 
 int main()
