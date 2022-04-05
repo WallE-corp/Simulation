@@ -4,10 +4,10 @@
 #include "olcPixelGameEngine.h"
 
 // Override base class with your custom functionality
-class Example : public olc::PixelGameEngine
+class WallESimulation : public olc::PixelGameEngine
 {
 public:
-	Example()
+	WallESimulation()
 	{
 		sAppName = "WallE Simulation";
 	}
@@ -31,7 +31,7 @@ public:
 
 int main()
 {
-	Example demo;
+	WallESimulation demo;
 	if (demo.Construct(1080, 720, 2, 2))
 		demo.Start();
 	return 0;
