@@ -8,7 +8,7 @@ To compile use the command:
 
 ## Windows
 
-* latest GCC via MSYS2 [install from here](https://www.msys2.org/).
+* latest G++ via MSYS2 MINGW [install from here](https://www.msys2.org/).
 * linked libraries needed:
   - `user32 gdi32 opengl32 gdiplus Shlwapi dwmapi stdc++fs`
 * Cpp standard `c++17`
