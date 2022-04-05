@@ -3,19 +3,40 @@
 
 #include "olcPixelGameEngine.h"
 
+struct sEdge {
+    float sx, sy;
+    float ex, Ey;
+};
+
+struct sCell {
+  int edge_id[4];
+  bool edge_exist[4];
+  bool exist = false;
+};
+
+#define NORTH 0
+#define SOUTH 1
+#define EAST 2
+#define WEST 3
+
 // Override base class with your custom functionality
 class WallESimulation : public olc::PixelGameEngine
 {
 public:
 	WallESimulation()
 	{
-		sAppName = "WallE Simulation";
+		sAppName = "Wall-E Simulation";
 	}
+
+private: 
+  sCell* world;
+  int nWorldWidth = 80;
+  int nWorldHeight = 60;
 
 public:
 	bool OnUserCreate() override
 	{
-		// Called once at the start, so create things here
+		world = new sCell[nWorldWidth * nWorldHeight];
 		return true;
 	}
 
@@ -32,7 +53,7 @@ public:
 int main()
 {
 	WallESimulation demo;
-	if (demo.Construct(1080, 720, 2, 2))
+	if (demo.Construct(640, 480, 2, 2))
 		demo.Start();
 	return 0;
 }
