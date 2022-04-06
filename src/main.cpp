@@ -46,73 +46,13 @@ public:
     // Live convert world to PolyMap. Can be done in OnUserCreate() if no live drawing enabled
     simulationWorld->ConvertTileMapToPolyMap(0, 0, 80, 60, fBlockWidth, simulationWorld->nWorldWidth);
 
-    // Move player
+    // Update WallE
     wallE->Update(this);
 
-    // DDA Algorithm ==============
-    // https://lodev.org/cgtutor/raycasting.html
-
-    // Form ray cast from player 
     olc::vf2d vRayStart = wallE->vPosition;
     olc::vf2d vMouse = {fSourceX, fSourceY};
     olc::vf2d vRayDir = (vMouse - wallE->vPosition).norm();
-    olc::vf2d vRayUnitStepSize = {
-      sqrt(1 + (vRayDir.y / vRayDir.x) * (vRayDir.y / vRayDir.x)),
-      sqrt(1 + (vRayDir.x / vRayDir.y) * (vRayDir.x / vRayDir.y))
-    };
-    olc::vi2d vMapCheck = vRayStart; // Implicit round downwards
-    olc::vf2d vRayLength;   // x: Length of ray in x-axis, y: Length of ray in y-axis
-    olc::vi2d vStep;
-
-    // Adjust which direction we are stepping in
-    // Set initial ray lengths
-    if (vRayDir.x < 0) {
-      vStep.x = -1;
-      vRayLength.x = (vRayStart.x - float(vMapCheck.x)) * vRayUnitStepSize.x;
-    }
-    else {
-      vStep.x = 1;
-      vRayLength.x = (float(vMapCheck.x + 1) - vRayStart.x) * vRayUnitStepSize.x;
-    }
-
-    if (vRayDir.y < 0) {
-      vStep.y = -1;
-      vRayLength.y = (vRayStart.y - float(vMapCheck.y)) * vRayUnitStepSize.y;
-    }
-    else {
-      vStep.y = 1;
-      vRayLength.y = (float(vMapCheck.y + 1) - vRayStart.y) * vRayUnitStepSize.y;
-    }
-
-    bool bTileFound = false;
-    float fMaxDistance = wallE->fFrontSensorReach;
-    float fDistance = 0.0f;
-    while(!bTileFound && fDistance < fMaxDistance) {
-      // Walk along ray
-      // If x-axis ray is shorter then move along x-axis
-      if (vRayLength.x < vRayLength.y) {
-        vMapCheck.x += vStep.x;
-        fDistance = vRayLength.x;
-        vRayLength.x += vRayUnitStepSize.x;
-      } else { // If y-axis ray is shorter then move along y-axis
-        vMapCheck.y += vStep.y;
-        fDistance = vRayLength.y;
-        vRayLength.y += vRayUnitStepSize.y;
-      }
-      
-      if (vMapCheck.x >= 0 && vMapCheck.x < simulationWorld->nWorldWidth * fBlockWidth &&
-          vMapCheck.y >= 0 && vMapCheck.y < simulationWorld->nWorldHeight * fBlockWidth) {
-        int nTileIndex = simulationWorld->GetTileIndex(vMapCheck.x, vMapCheck.y, fBlockWidth);
-        if (simulationWorld->world[nTileIndex].exist) {
-          bTileFound = true;
-        }
-      }
-    }
-
-    olc::vf2d vIntersection;
-    if (bTileFound) {
-      vIntersection = vRayStart + vRayDir * fDistance;
-    }
+    auto vIntersection = simulationWorld->CheckRayIntersection(vRayStart, vRayDir, wallE->fFrontSensorReach);
 
     // Drawing
     Clear(olc::BLACK);
@@ -144,8 +84,8 @@ public:
       0xFF0FF0FF
     );
 
-    if (bTileFound) {
-      DrawCircle(vIntersection, 5, olc::GREEN);
+    if (vIntersection.has_value()) {
+      DrawCircle(vIntersection.value(), 5, olc::GREEN);
     }
 
 		return true;

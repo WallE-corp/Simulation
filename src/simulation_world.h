@@ -1,7 +1,9 @@
 #pragma once
 
+#include "olcPixelGameEngine.h"
 #include <stdlib.h>
 #include <vector>
+#include <optional>
 
 struct sEdge {
     float sx, sy;
@@ -189,6 +191,68 @@ class SimulationWorld {
         }
       }
   }
-  private:
 
+  std::optional<olc::vf2d> CheckRayIntersection(olc::vf2d vRayStart, olc::vf2d vRayDir, float fMaxDistance) {
+    // DDA Algorithm ==============
+    // https://lodev.org/cgtutor/raycasting.html
+    
+    olc::vf2d vRayUnitStepSize = {
+      sqrt(1 + (vRayDir.y / vRayDir.x) * (vRayDir.y / vRayDir.x)),
+      sqrt(1 + (vRayDir.x / vRayDir.y) * (vRayDir.x / vRayDir.y))
+    };
+    olc::vi2d vMapCheck = vRayStart; // Implicit round downwards
+    olc::vf2d vRayLength;   // x: Length of ray in x-axis, y: Length of ray in y-axis
+    olc::vi2d vStep;
+
+    // Adjust which direction we are stepping in
+    // Set initial ray lengths
+    if (vRayDir.x < 0) {
+      vStep.x = -1;
+      vRayLength.x = (vRayStart.x - float(vMapCheck.x)) * vRayUnitStepSize.x;
+    }
+    else {
+      vStep.x = 1;
+      vRayLength.x = (float(vMapCheck.x + 1) - vRayStart.x) * vRayUnitStepSize.x;
+    }
+
+    if (vRayDir.y < 0) {
+      vStep.y = -1;
+      vRayLength.y = (vRayStart.y - float(vMapCheck.y)) * vRayUnitStepSize.y;
+    }
+    else {
+      vStep.y = 1;
+      vRayLength.y = (float(vMapCheck.y + 1) - vRayStart.y) * vRayUnitStepSize.y;
+    }
+
+    bool bTileFound = false;
+    float fDistance = 0.0f;
+    while(!bTileFound && fDistance < fMaxDistance) {
+      // Walk along ray
+      // If x-axis ray is shorter then move along x-axis
+      if (vRayLength.x < vRayLength.y) {
+        vMapCheck.x += vStep.x;
+        fDistance = vRayLength.x;
+        vRayLength.x += vRayUnitStepSize.x;
+      } else { // If y-axis ray is shorter then move along y-axis
+        vMapCheck.y += vStep.y;
+        fDistance = vRayLength.y;
+        vRayLength.y += vRayUnitStepSize.y;
+      }
+      
+      if (vMapCheck.x >= 0 && vMapCheck.x < nWorldWidth * fBlockWidth &&
+          vMapCheck.y >= 0 && vMapCheck.y < nWorldHeight * fBlockWidth) {
+        int nTileIndex = GetTileIndex(vMapCheck.x, vMapCheck.y, fBlockWidth);
+        if (world[nTileIndex].exist) {
+          bTileFound = true;
+        }
+      }
+    }
+
+    std::optional<olc::vf2d> vIntersection;
+    if (bTileFound) {
+      vIntersection = vRayStart + vRayDir * fDistance;
+    }
+
+    return vIntersection;
+  }
 };
