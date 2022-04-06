@@ -15,7 +15,9 @@ public:
 
 private: 
   SimulationWorld* simulationWorld;
-
+  olc::vf2d vPlayerPosition = {0, 0};
+  float fPlayerSpeed = 100.0f;
+  float fPlayerSightLength = 100.0f;
 
 public:
 	bool OnUserCreate() override {
@@ -44,8 +46,20 @@ public:
     // Live convert world to PolyMap. Can be done in OnUserCreate() if no live drawing enabled
     simulationWorld->ConvertTileMapToPolyMap(0, 0, 80, 60, fBlockWidth, simulationWorld->nWorldWidth);
 
+    // Move player
+    if (GetKey(olc::Key::W).bHeld) vPlayerPosition.y -= fPlayerSpeed * fElapsedTime;
+    if (GetKey(olc::Key::S).bHeld) vPlayerPosition.y += fPlayerSpeed * fElapsedTime;
+    if (GetKey(olc::Key::A).bHeld) vPlayerPosition.x -= fPlayerSpeed * fElapsedTime;
+    if (GetKey(olc::Key::D).bHeld) vPlayerPosition.x += fPlayerSpeed * fElapsedTime;
+    
+    // Form ray cast from player 
+    olc::vf2d vRayStart = vPlayerPosition;
+    olc::vf2d vMouse = {fSourceX, fSourceY};
+    olc::vf2d vRayDir = (vMouse - vPlayerPosition).norm();
+
     // Drawing
     Clear(olc::BLACK);
+
 
     // Draw tiles
     for (int x = 0; x < simulationWorld->nWorldWidth; x++)
@@ -58,9 +72,20 @@ public:
     // Draw edges in PolyMap
     for (auto &edge : simulationWorld->vecEdges) {
       DrawLine(edge.sx, edge.sy, edge.ex, edge.ey, olc::WHITE);
-      FillCircle(edge.sx, edge.sy, 2, olc::RED);
-      FillCircle(edge.ex, edge.ey, 2, olc::RED);
+      FillCircle(edge.sx, edge.sy, 1, olc::RED);
+      FillCircle(edge.ex, edge.ey, 1, olc::RED);
     }
+
+    // Draw player
+    FillCircle(vPlayerPosition.x, vPlayerPosition.y, 5, olc::YELLOW);
+    DrawLine(
+      vPlayerPosition.x, 
+      vPlayerPosition.y, 
+      vPlayerPosition.x + vRayDir.x * fPlayerSightLength, 
+      vPlayerPosition.y + vRayDir.y * fPlayerSightLength,
+      olc::RED, 
+      0xFF0FF0FF
+    );
 
 		return true;
 	}
