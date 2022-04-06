@@ -3,6 +3,7 @@
 
 #include "olcPixelGameEngine.h"
 #include "simulation_world.h"
+#include "wall_e.h"
 
 // Override base class with your custom functionality
 class WallESimulation : public olc::PixelGameEngine
@@ -15,13 +16,12 @@ public:
 
 private: 
   SimulationWorld* simulationWorld;
-  olc::vf2d vPlayerPosition = {0, 0};
-  float fPlayerSpeed = 100.0f;
-  float fPlayerSightLength = 100.0f;
+  WallE* wallE;
 
 public:
 	bool OnUserCreate() override {
     simulationWorld = new SimulationWorld();
+    wallE = new WallE(simulationWorld);
 		return true;
 	}
 
@@ -47,19 +47,15 @@ public:
     simulationWorld->ConvertTileMapToPolyMap(0, 0, 80, 60, fBlockWidth, simulationWorld->nWorldWidth);
 
     // Move player
-    if (GetKey(olc::Key::W).bHeld) vPlayerPosition.y -= fPlayerSpeed * fElapsedTime;
-    if (GetKey(olc::Key::S).bHeld) vPlayerPosition.y += fPlayerSpeed * fElapsedTime;
-    if (GetKey(olc::Key::A).bHeld) vPlayerPosition.x -= fPlayerSpeed * fElapsedTime;
-    if (GetKey(olc::Key::D).bHeld) vPlayerPosition.x += fPlayerSpeed * fElapsedTime;
-    
+    wallE->Update(this);
 
     // DDA Algorithm ==============
     // https://lodev.org/cgtutor/raycasting.html
 
     // Form ray cast from player 
-    olc::vf2d vRayStart = vPlayerPosition;
+    olc::vf2d vRayStart = wallE->vPosition;
     olc::vf2d vMouse = {fSourceX, fSourceY};
-    olc::vf2d vRayDir = (vMouse - vPlayerPosition).norm();
+    olc::vf2d vRayDir = (vMouse - wallE->vPosition).norm();
     olc::vf2d vRayUnitStepSize = {
       sqrt(1 + (vRayDir.y / vRayDir.x) * (vRayDir.y / vRayDir.x)),
       sqrt(1 + (vRayDir.x / vRayDir.y) * (vRayDir.x / vRayDir.y))
@@ -89,7 +85,7 @@ public:
     }
 
     bool bTileFound = false;
-    float fMaxDistance = fPlayerSightLength;
+    float fMaxDistance = wallE->fFrontSensorReach;
     float fDistance = 0.0f;
     while(!bTileFound && fDistance < fMaxDistance) {
       // Walk along ray
@@ -138,12 +134,12 @@ public:
     }
 
     // Draw player
-    FillCircle(vPlayerPosition.x, vPlayerPosition.y, 5, olc::YELLOW);
+    FillCircle(wallE->vPosition.x, wallE->vPosition.y, 5, olc::YELLOW);
     DrawLine(
-      vPlayerPosition.x, 
-      vPlayerPosition.y, 
-      vPlayerPosition.x + vRayDir.x * fPlayerSightLength, 
-      vPlayerPosition.y + vRayDir.y * fPlayerSightLength,
+      wallE->vPosition.x, 
+      wallE->vPosition.y, 
+      wallE->vPosition.x + vRayDir.x * wallE->fFrontSensorReach, 
+      wallE->vPosition.y + vRayDir.y * wallE->fFrontSensorReach,
       olc::RED, 
       0xFF0FF0FF
     );

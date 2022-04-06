@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdlib.h>
 #include <vector>
 
@@ -27,14 +29,15 @@ class SimulationWorld {
 
   SimulationWorld() {
     world = new sCell[nWorldWidth * nWorldHeight];
+
+    // Add initial borders
     for (int x = 0; x < nWorldWidth; x++) {
       world[x].exist = true;
       world[(nWorldHeight - 1) * nWorldWidth + x].exist = true;
     }
     for (int y = 0; y < nWorldHeight; y++) {
       world[y * nWorldWidth].exist = true;
-      world[y * nWorldWidth + (nWorldWidth - 1)].exist = true;
-      
+      world[y * nWorldWidth + (nWorldWidth - 1)].exist = true;   
     }
   }
   float GetTileIndex(float fSourceX, float fSourceY, float fBlockWidth) {
