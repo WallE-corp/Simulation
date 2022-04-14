@@ -3,6 +3,7 @@
 #include "simulation_world.h"
 #include "olcPixelGameEngine.h"
 #include <optional>
+#include <vector>
 
 class WallE {
   public:
@@ -11,6 +12,8 @@ class WallE {
   float fFrontSensorReach;
   std::optional<olc::vf2d> vFrontSensorIntersection;
   olc::vf2d vFrontSensorDirection;
+  std::vector<std::optional<olc::vf2d>> LiDARIntersections;
+  std::vector<olc::vf2d> LiDARRays;
 
   WallE(SimulationWorld*);
   void Update(olc::PixelGameEngine*);
