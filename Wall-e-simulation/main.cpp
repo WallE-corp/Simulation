@@ -49,10 +49,6 @@ public:
     // Update WallE
     wallE->Update(this);
 
-    olc::vf2d vRayStart = wallE->vPosition;
-    olc::vf2d vMouse = {fSourceX, fSourceY};
-    olc::vf2d vRayDir = (vMouse - wallE->vPosition).norm();
-    auto vIntersection = simulationWorld->CheckRayIntersection(vRayStart, vRayDir, wallE->fFrontSensorReach);
 
     // Drawing
     Clear(olc::BLACK);
@@ -73,24 +69,8 @@ public:
       FillCircle(edge.ex, edge.ey, 1, olc::RED);
     }
 
-    // Draw player
-    // FillCircle(wallE->vPosition.x, wallE->vPosition.y, 5, olc::YELLOW);
     wallE->Draw(this, fElapsedTime);
-    /*
-    DrawLine(
-      wallE->vPosition.x, 
-      wallE->vPosition.y, 
-      wallE->vPosition.x + vRayDir.x * wallE->fFrontSensorReach, 
-      wallE->vPosition.y + vRayDir.y * wallE->fFrontSensorReach,
-      olc::RED, 
-      0xFF0FF0FF
-    );
 
-
-    if (vIntersection.has_value()) {
-      DrawCircle(vIntersection.value(), 5, olc::GREEN);
-    }
-    */
 
 		return true;
 	}
