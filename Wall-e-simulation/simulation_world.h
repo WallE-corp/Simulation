@@ -30,7 +30,10 @@ class SimulationWorld {
   std::vector<sEdge> vecEdges;
 
   SimulationWorld();
+
   float GetTileIndex(float fSourceX, float fSourceY, float fBlockWidth);
   void ConvertTileMapToPolyMap(int sx, int sy, int w, int h, float fBlockWidth, int pitch);
   std::optional<olc::vf2d> CheckRayIntersection(olc::vf2d vRayStart, olc::vf2d vRayDir, float fMaxDistance);
+
+  void Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime);
 };

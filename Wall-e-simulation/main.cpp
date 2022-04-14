@@ -55,6 +55,7 @@ public:
 
 
     // Draw tiles
+    /*
     for (int x = 0; x < simulationWorld->nWorldWidth; x++)
       for (int y = 0; y < simulationWorld->nWorldHeight; y++) {
         if (simulationWorld->world[y * simulationWorld->nWorldWidth + x].exist) {
@@ -68,7 +69,8 @@ public:
       FillCircle(edge.sx, edge.sy, 1, olc::RED);
       FillCircle(edge.ex, edge.ey, 1, olc::RED);
     }
-
+    */
+    simulationWorld->Draw(this, fElapsedTime);
     wallE->Draw(this, fElapsedTime);
 
 
