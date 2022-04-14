@@ -34,21 +34,24 @@ void WallE::Update(olc::PixelGameEngine* gameEngine) {
   LiDARRays.clear();
   float radius = fFrontSensorReach;
   int nNumRays = 36;
-  for (int i = 0; i < nNumRays; i++) {
+  for (int i = 0; i < nNumRays + 1; i++) {
     float angle = i * ((360 - nNumRays) / nNumRays);
     float fRayEndX = 1 * std::cos(angle);
     float fRayEndY = 1 * std::sin(angle);
     olc::vf2d ray = { fRayEndX, fRayEndY };
-    LiDARRays.push_back(ray);
-
+    
     auto vIntersection = world->CheckRayIntersection(vPosition, ray, radius);
     LiDARIntersections.push_back(vIntersection);
+    if (vIntersection.has_value()) {
+      LiDARRays.push_back(vIntersection.value());
+    }
+    else {
+      LiDARRays.push_back((ray * fFrontSensorReach) + vPosition);
+    }
   }
 }
 
 void WallE::Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
-  // Draw body
-  gameEngine->FillCircle(vPosition.x, vPosition.y, 5, olc::YELLOW);
 
   // Draw front sensor ray
   gameEngine->DrawLine(
@@ -69,16 +72,18 @@ void WallE::Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
     gameEngine->DrawLine(
       vPosition.x,
       vPosition.y,
-      vPosition.x + vRay.x * fFrontSensorReach,
-      vPosition.y + vRay.y * fFrontSensorReach,
-      olc::DARK_GREY,
-      0xFF0FF0FF
+      vRay.x,
+      vRay.y,
+      olc::Pixel(25, 25, 25, 250)
     );
   }
 
   for (auto vIntersection : LiDARIntersections) {
     if (vIntersection.has_value()) {
-      gameEngine->DrawCircle(vIntersection.value(), 5, olc::YELLOW);
+      gameEngine->FillCircle(vIntersection.value(), 2, olc::YELLOW);
     }
   }
+
+  // Draw body
+  gameEngine->FillCircle(vPosition.x, vPosition.y, 5, olc::YELLOW);
 }
