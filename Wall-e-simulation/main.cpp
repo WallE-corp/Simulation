@@ -28,48 +28,13 @@ public:
 	bool OnUserUpdate(float fElapsedTime) override
 	{
 		// Called once per frame
-    float fBlockWidth = simulationWorld->fBlockWidth;
-    float fSourceX = GetMouseX();
-    float fSourceY = GetMouseY();
 
-    // Set tile to on or off
-    if (GetMouse(0).bHeld) {
-      int nTileIndex = simulationWorld->GetTileIndex(fSourceX, fSourceY, fBlockWidth);
-      simulationWorld->world[nTileIndex].exist = true;
-    }
-    if (GetMouse(1).bHeld) {
-      int nTileIndex = simulationWorld->GetTileIndex(fSourceX, fSourceY, fBlockWidth);
-      simulationWorld->world[nTileIndex].exist = false;
-    }
-
-
-    // Live convert world to PolyMap. Can be done in OnUserCreate() if no live drawing enabled
-    simulationWorld->ConvertTileMapToPolyMap(0, 0, 80, 60, fBlockWidth, simulationWorld->nWorldWidth);
-
-    // Update WallE
+    simulationWorld->Update(this, fElapsedTime);
     wallE->Update(this);
-
 
     // Drawing
     Clear(olc::BLACK);
 
-
-    // Draw tiles
-    /*
-    for (int x = 0; x < simulationWorld->nWorldWidth; x++)
-      for (int y = 0; y < simulationWorld->nWorldHeight; y++) {
-        if (simulationWorld->world[y * simulationWorld->nWorldWidth + x].exist) {
-          FillRect(x * fBlockWidth, y * fBlockWidth, fBlockWidth, fBlockWidth, olc::BLUE);
-        }
-      }
-
-    // Draw edges in PolyMap
-    for (auto &edge : simulationWorld->vecEdges) {
-      DrawLine(edge.sx, edge.sy, edge.ex, edge.ey, olc::WHITE);
-      FillCircle(edge.sx, edge.sy, 1, olc::RED);
-      FillCircle(edge.ex, edge.ey, 1, olc::RED);
-    }
-    */
     simulationWorld->Draw(this, fElapsedTime);
     wallE->Draw(this, fElapsedTime);
 

@@ -227,6 +227,24 @@ std::optional<olc::vf2d> SimulationWorld::CheckRayIntersection(olc::vf2d vRaySta
   return vIntersection;
 }
 
+void SimulationWorld::Update(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
+  float fSourceX = gameEngine->GetMouseX();
+  float fSourceY = gameEngine->GetMouseY();
+
+  // Set tile to on or off
+  if (gameEngine->GetMouse(0).bHeld) {
+    int nTileIndex = GetTileIndex(fSourceX, fSourceY, fBlockWidth);
+    world[nTileIndex].exist = true;
+  }
+  if (gameEngine->GetMouse(1).bHeld) {
+    int nTileIndex = GetTileIndex(fSourceX, fSourceY, fBlockWidth);
+    world[nTileIndex].exist = false;
+  }
+  
+  // Live convert world to PolyMap. Can be done in OnUserCreate() if no live drawing enabled
+  ConvertTileMapToPolyMap(0, 0, 80, 60, fBlockWidth, nWorldWidth);
+}
+
 void SimulationWorld::Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
   for (int x = 0; x < nWorldWidth; x++)
     for (int y = 0; y < nWorldHeight; y++) {
