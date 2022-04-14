@@ -20,9 +20,9 @@ private:
 
 public:
 	bool OnUserCreate() override {
-    simulationWorld = new SimulationWorld();
-    wallE = new WallE(simulationWorld);
-		return true;
+      simulationWorld = new SimulationWorld();
+      wallE = new WallE(simulationWorld);
+	  return true;
 	}
 
 	bool OnUserUpdate(float fElapsedTime) override
@@ -74,7 +74,9 @@ public:
     }
 
     // Draw player
-    FillCircle(wallE->vPosition.x, wallE->vPosition.y, 5, olc::YELLOW);
+    // FillCircle(wallE->vPosition.x, wallE->vPosition.y, 5, olc::YELLOW);
+    wallE->Draw(this, fElapsedTime);
+    /*
     DrawLine(
       wallE->vPosition.x, 
       wallE->vPosition.y, 
@@ -84,9 +86,11 @@ public:
       0xFF0FF0FF
     );
 
+
     if (vIntersection.has_value()) {
       DrawCircle(vIntersection.value(), 5, olc::GREEN);
     }
+    */
 
 		return true;
 	}
