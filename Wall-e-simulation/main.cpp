@@ -33,7 +33,7 @@ public:
     wallE->Update(this);
 
     // Drawing
-    Clear(olc::BLACK);
+    Clear(olc::WHITE);
 
     simulationWorld->Draw(this, fElapsedTime);
     wallE->Draw(this, fElapsedTime);

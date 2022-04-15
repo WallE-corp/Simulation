@@ -68,6 +68,7 @@ void WallE::Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
     gameEngine->DrawCircle(vFrontSensorIntersection.value(), 5, olc::GREEN);
   }
 
+  /*
   for (auto vRay : LiDARRays) {
     gameEngine->DrawLine(
       vPosition.x,
@@ -77,6 +78,7 @@ void WallE::Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
       olc::Pixel(25, 25, 25, 250)
     );
   }
+  */
 
   for (auto vIntersection : LiDARIntersections) {
     if (vIntersection.has_value()) {
