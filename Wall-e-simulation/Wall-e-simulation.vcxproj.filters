@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\position_tracking_method_comparison">
+      <UniqueIdentifier>{d48f78a5-e850-43cb-afea-ad2ebd0c5869}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -23,6 +26,9 @@
     </ClCompile>
     <ClCompile Include="wall_e.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="position_tracking_method_comparison\main.cpp">
+      <Filter>Source Files\position_tracking_method_comparison</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="wall_e.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="movement_strategies\PlayerControlledMovementStrategy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

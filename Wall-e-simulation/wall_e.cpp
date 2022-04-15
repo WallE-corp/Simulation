@@ -9,16 +9,13 @@ WallE::WallE(SimulationWorld* _world) {
   fFrontSensorReach = 100.0f;
   vFrontSensorIntersection = { 0, 0 };
   vFrontSensorDirection = { 0, 0 };
+  movementStrategy = new PlayerControlledMovementStrategy();
 }
 
 void WallE::Update(olc::PixelGameEngine* gameEngine) {
-  float fElapsedTime = gameEngine->GetElapsedTime();
-
-   // Move player
-  if (gameEngine->GetKey(olc::Key::W).bHeld) vPosition.y -= fMoveSpeed * fElapsedTime;
-  if (gameEngine->GetKey(olc::Key::S).bHeld) vPosition.y += fMoveSpeed * fElapsedTime;
-  if (gameEngine->GetKey(olc::Key::A).bHeld) vPosition.x -= fMoveSpeed * fElapsedTime;
-  if (gameEngine->GetKey(olc::Key::D).bHeld) vPosition.x += fMoveSpeed * fElapsedTime;
+  tuple<float, float> newPosition = movementStrategy->CalculateNextPosition(vPosition.x, vPosition.y, fMoveSpeed, gameEngine);
+  vPosition.x = get<0>(newPosition);
+  vPosition.y = get<1>(newPosition);
 
   float fSourceX = gameEngine->GetMouseX();
   float fSourceY = gameEngine->GetMouseY();
@@ -86,6 +83,13 @@ void WallE::Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
     }
   }
 
+  //
+  movementStrategy->DrawGizmos(gameEngine);
+
   // Draw body
   gameEngine->FillCircle(vPosition.x, vPosition.y, 5, olc::YELLOW);
+}
+
+WallE::~WallE() {
+  delete this->movementStrategy;
 }
