@@ -4,6 +4,7 @@
 #include "../simulation_world.h"
 #include "../wall_e.h"
 #include "../olcPixelGameEngine.h"
+#include "../movement_strategies/WanderMovementStrategy.h"
 
 // Override base class with your custom functionality
 class WallESimulation : public olc::PixelGameEngine
@@ -22,6 +23,8 @@ public:
 	bool OnUserCreate() override {
 		simulationWorld = new SimulationWorld();
 		wallE = new WallE(simulationWorld);
+		delete wallE->movementStrategy;
+		wallE->movementStrategy = new WanderMovementStrategy(simulationWorld);
 		return true;
 	}
 
@@ -33,7 +36,7 @@ public:
 		wallE->Update(this);
 
 		// Drawing
-		Clear(olc::BLUE);
+		Clear(olc::DARK_GREY);
 
 		simulationWorld->Draw(this, fElapsedTime);
 		wallE->Draw(this, fElapsedTime);

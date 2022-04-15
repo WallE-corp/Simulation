@@ -16,6 +16,9 @@
     <Filter Include="Source Files\position_tracking_method_comparison">
       <UniqueIdentifier>{d48f78a5-e850-43cb-afea-ad2ebd0c5869}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\movement_strategies">
+      <UniqueIdentifier>{6f00b6ac-0a1e-4c94-91ea-2cb20a9a5abd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,7 +51,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="movement_strategies\PlayerControlledMovementStrategy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\movement_strategies</Filter>
+    </ClInclude>
+    <ClInclude Include="movement_strategies\WanderMovementStrategy.h">
+      <Filter>Source Files\movement_strategies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

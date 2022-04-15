@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="MovementStrategy.h" />
     <ClInclude Include="movement_strategies\PlayerControlledMovementStrategy.h" />
+    <ClInclude Include="movement_strategies\WanderMovementStrategy.h" />
     <ClInclude Include="olcPixelGameEngine.h" />
     <ClInclude Include="simulation_world.h" />
     <ClInclude Include="stb_image.h" />

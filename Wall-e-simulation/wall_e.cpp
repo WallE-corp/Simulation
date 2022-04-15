@@ -4,7 +4,7 @@
 WallE::WallE(SimulationWorld* _world) {
   // Initialize variables
   world = _world;
-  vPosition = {0, 0};
+  vPosition = {50, 50};
   fMoveSpeed = 100.0f;
   fFrontSensorReach = 100.0f;
   vFrontSensorIntersection = { 0, 0 };
@@ -46,10 +46,23 @@ void WallE::Update(olc::PixelGameEngine* gameEngine) {
       LiDARRays.push_back((ray * fFrontSensorReach) + vPosition);
     }
   }
+
+  if (vPosition.x < 0) {
+    vPosition.x = gameEngine->GetDrawTargetWidth();
+  }
+  if (vPosition.x > gameEngine->GetDrawTargetWidth()) {
+    vPosition.x = 0;
+  }
+  if (vPosition.y < 0) {
+    vPosition.y = gameEngine->GetDrawTargetHeight();
+  }
+  if (vPosition.y > gameEngine->GetDrawTargetHeight()) {
+    vPosition.y = 0;
+  }
 }
 
 void WallE::Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
-
+  /*
   // Draw front sensor ray
   gameEngine->DrawLine(
     vPosition.x,
@@ -59,11 +72,13 @@ void WallE::Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
     olc::RED,
     0xFF0FF0FF
   );
+  
 
   // Draw intersections
   if (vFrontSensorIntersection.has_value()) {
     gameEngine->DrawCircle(vFrontSensorIntersection.value(), 5, olc::GREEN);
   }
+  */
 
   /*
   for (auto vRay : LiDARRays) {
@@ -84,7 +99,7 @@ void WallE::Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
   }
 
   //
-  movementStrategy->DrawGizmos(gameEngine);
+  // movementStrategy->DrawGizmos(gameEngine);
 
   // Draw body
   gameEngine->FillCircle(vPosition.x, vPosition.y, 5, olc::YELLOW);
