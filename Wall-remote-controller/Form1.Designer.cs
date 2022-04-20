@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.Button btnRegister;
             this.gbxControls = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnUp = new System.Windows.Forms.Button();
@@ -37,16 +38,20 @@
             this.addressTbx = new System.Windows.Forms.TextBox();
             this.addressLbl = new System.Windows.Forms.Label();
             this.connectBtn = new System.Windows.Forms.Button();
+            btnRegister = new System.Windows.Forms.Button();
             this.gbxControls.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxControls
             // 
+            this.gbxControls.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.gbxControls.Controls.Add(btnRegister);
             this.gbxControls.Controls.Add(this.panel1);
-            this.gbxControls.Location = new System.Drawing.Point(12, 184);
+            this.gbxControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gbxControls.Location = new System.Drawing.Point(0, 55);
             this.gbxControls.Name = "gbxControls";
-            this.gbxControls.Size = new System.Drawing.Size(514, 227);
+            this.gbxControls.Size = new System.Drawing.Size(337, 225);
             this.gbxControls.TabIndex = 0;
             this.gbxControls.TabStop = false;
             this.gbxControls.Text = "Controls";
@@ -57,7 +62,7 @@
             this.panel1.Controls.Add(this.btnRight);
             this.panel1.Controls.Add(this.btnDown);
             this.panel1.Controls.Add(this.btnLeft);
-            this.panel1.Location = new System.Drawing.Point(6, 50);
+            this.panel1.Location = new System.Drawing.Point(6, 48);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(244, 171);
             this.panel1.TabIndex = 4;
@@ -132,17 +137,28 @@
             this.connectBtn.UseVisualStyleBackColor = true;
             this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
             // 
+            // btnRegister
+            // 
+            btnRegister.Location = new System.Drawing.Point(6, 19);
+            btnRegister.Name = "btnRegister";
+            btnRegister.Size = new System.Drawing.Size(109, 23);
+            btnRegister.TabIndex = 4;
+            btnRegister.Text = "Register as remote";
+            btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 423);
+            this.ClientSize = new System.Drawing.Size(337, 280);
             this.Controls.Add(this.connectBtn);
             this.Controls.Add(this.addressLbl);
             this.Controls.Add(this.addressTbx);
             this.Controls.Add(this.gbxControls);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "WallE Remote Controls";
             this.gbxControls.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

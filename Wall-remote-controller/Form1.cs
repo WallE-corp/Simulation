@@ -87,6 +87,19 @@ namespace Wall_remote_controller
             });
         }
 
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            var registrationCommmand = new WallERegistrationCommand
+            {
+                data = new WallERegistrationData
+                {
+                    role = "remote"
+                }
+            };
+            string jsonString = JsonConvert.SerializeObject(registrationCommmand);
+            client.EmitAsync("message", jsonString);
+        }
+
         #region Movement Commands
         public void MoveBackwardStart(object sender, MouseEventArgs e)
         {
@@ -129,5 +142,7 @@ namespace Wall_remote_controller
             EmitMovementCommand("right", "stop");
         }
         #endregion
+
+        
     }
 }

@@ -31,4 +31,19 @@ namespace Wall_remote_controller
             get { return _type; }
         }
     }
+
+    public class WallERegistrationData
+    {
+        public string role;
+    }
+    public class WallERegistrationCommand : WallECommand
+    {
+        int _type = 6;
+        public WallERegistrationData data { get; set; }
+
+        public override int type
+        {
+            get { return _type; }
+        }
+    }
 }
