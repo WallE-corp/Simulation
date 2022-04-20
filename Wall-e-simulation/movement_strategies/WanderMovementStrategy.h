@@ -67,7 +67,7 @@ public:
 		if (evadeTarget.has_value()) {
 			evadeForce = Seek(evadeTarget.value());
 			MultVec(&evadeForce, -1);
-			SetMag(&evadeForce, maxForce * (followPoint.mag() / (maxSpeed/2)));
+			SetMag(&evadeForce, maxForce *5);
 			ApplyForce(evadeForce);
 		}
 
@@ -136,11 +136,6 @@ public:
 				evadeTarget.value().y,
 				3,
 				olc::RED
-			);
-
-			gameEngine->DrawString(
-				{ 0, 0 },
-				evadeForce.str()
 			);
 
 			gameEngine->DrawCircle(

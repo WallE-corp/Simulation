@@ -41,7 +41,7 @@ public:
 		simulationWorld->Draw(this, fElapsedTime);
 		wallE->Draw(this, fElapsedTime);
 
-
+		std::cout << "meep";
 		return true;
 	}
 };
