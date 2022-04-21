@@ -246,19 +246,21 @@ void SimulationWorld::Update(olc::PixelGameEngine* gameEngine, float fElapsedTim
 }
 
 void SimulationWorld::Draw(olc::PixelGameEngine* gameEngine, float fElapsedTime) {
+  /*
   for (int x = 0; x < nWorldWidth; x++)
     for (int y = 0; y < nWorldHeight; y++) {
       if (world[y * nWorldWidth + x].exist) {
         gameEngine->FillRect(x * fBlockWidth, y * fBlockWidth, fBlockWidth, fBlockWidth, olc::BLACK);
       }
     }
-
+    */
+  
   // Draw edges in PolyMap
-  /*
+  
   for (auto& edge : vecEdges) {
     gameEngine->DrawLine(edge.sx, edge.sy, edge.ex, edge.ey, olc::WHITE);
-    gameEngine->FillCircle(edge.sx, edge.sy, 1, olc::RED);
-    gameEngine->FillCircle(edge.ex, edge.ey, 1, olc::RED);
+    //gameEngine->FillCircle(edge.sx, edge.sy, 1, olc::RED);
+    //I gameEngine->FillCircle(edge.ex, edge.ey, 1, olc::RED);
   }
-  */
+  
 }
