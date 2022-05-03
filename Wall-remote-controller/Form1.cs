@@ -34,6 +34,13 @@ namespace Wall_remote_controller
                 client = new SocketIO($"http://{address}");
                 client.OnConnected += OnConnected;
                 client.OnDisconnected += OnDisconnected;
+                client.On("message", response =>
+                {
+                    lstvMessages.Invoke((MethodInvoker)delegate
+                    {
+                        lstvMessages.Items.Add(response.GetValue<string>());
+                    });
+                });
 
             }
 
@@ -44,9 +51,7 @@ namespace Wall_remote_controller
             {
                 await client.DisconnectAsync();
                 
-            }
-
-            
+            }   
         }
 
         private WallEMovementCommand CreateMovementCommand(string movement, string action)
@@ -141,8 +146,45 @@ namespace Wall_remote_controller
         {
             EmitMovementCommand("right", "stop");
         }
+
         #endregion
 
-        
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.W:
+                    EmitMovementCommand("forward", "start");
+                    break;
+                case Keys.S:
+                    EmitMovementCommand("backward", "start");
+                    break;
+                case Keys.A:
+                    EmitMovementCommand("left", "start");
+                    break;
+                case Keys.D:
+                    EmitMovementCommand("right", "start");
+                    break;
+            }
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.W:
+                    EmitMovementCommand("forward", "stop");
+                    break;
+                case Keys.S:
+                    EmitMovementCommand("backward", "stop");
+                    break;
+                case Keys.A:
+                    EmitMovementCommand("left", "stop");
+                    break;
+                case Keys.D:
+                    EmitMovementCommand("right", "stop");
+                    break;
+            }
+        }
     }
 }

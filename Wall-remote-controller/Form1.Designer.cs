@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.Button btnRegister;
             this.gbxControls = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlMovementControls = new System.Windows.Forms.Panel();
             this.btnUp = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
@@ -38,34 +38,50 @@
             this.addressTbx = new System.Windows.Forms.TextBox();
             this.addressLbl = new System.Windows.Forms.Label();
             this.connectBtn = new System.Windows.Forms.Button();
+            this.lstvMessages = new System.Windows.Forms.ListBox();
+            this.lblReceivedMessages = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             btnRegister = new System.Windows.Forms.Button();
             this.gbxControls.SuspendLayout();
+            this.pnlMovementControls.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // btnRegister
+            // 
+            btnRegister.Location = new System.Drawing.Point(6, 19);
+            btnRegister.Name = "btnRegister";
+            btnRegister.Size = new System.Drawing.Size(109, 23);
+            btnRegister.TabIndex = 4;
+            btnRegister.Text = "Register as remote";
+            btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
             // gbxControls
             // 
+            this.gbxControls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbxControls.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.gbxControls.Controls.Add(btnRegister);
-            this.gbxControls.Controls.Add(this.panel1);
-            this.gbxControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbxControls.Location = new System.Drawing.Point(0, 55);
+            this.gbxControls.Controls.Add(this.pnlMovementControls);
+            this.gbxControls.Location = new System.Drawing.Point(12, 87);
             this.gbxControls.Name = "gbxControls";
-            this.gbxControls.Size = new System.Drawing.Size(337, 225);
+            this.gbxControls.Size = new System.Drawing.Size(423, 295);
             this.gbxControls.TabIndex = 0;
             this.gbxControls.TabStop = false;
             this.gbxControls.Text = "Controls";
             // 
-            // panel1
+            // pnlMovementControls
             // 
-            this.panel1.Controls.Add(this.btnUp);
-            this.panel1.Controls.Add(this.btnRight);
-            this.panel1.Controls.Add(this.btnDown);
-            this.panel1.Controls.Add(this.btnLeft);
-            this.panel1.Location = new System.Drawing.Point(6, 48);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(244, 171);
-            this.panel1.TabIndex = 4;
+            this.pnlMovementControls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlMovementControls.Controls.Add(this.btnUp);
+            this.pnlMovementControls.Controls.Add(this.btnRight);
+            this.pnlMovementControls.Controls.Add(this.btnDown);
+            this.pnlMovementControls.Controls.Add(this.btnLeft);
+            this.pnlMovementControls.Location = new System.Drawing.Point(6, 118);
+            this.pnlMovementControls.Name = "pnlMovementControls";
+            this.pnlMovementControls.Size = new System.Drawing.Size(244, 171);
+            this.pnlMovementControls.TabIndex = 4;
             // 
             // btnUp
             // 
@@ -137,30 +153,55 @@
             this.connectBtn.UseVisualStyleBackColor = true;
             this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
             // 
-            // btnRegister
+            // lstvMessages
             // 
-            btnRegister.Location = new System.Drawing.Point(6, 19);
-            btnRegister.Name = "btnRegister";
-            btnRegister.Size = new System.Drawing.Size(109, 23);
-            btnRegister.TabIndex = 4;
-            btnRegister.Text = "Register as remote";
-            btnRegister.UseVisualStyleBackColor = true;
-            btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            this.lstvMessages.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lstvMessages.FormattingEnabled = true;
+            this.lstvMessages.Location = new System.Drawing.Point(0, 31);
+            this.lstvMessages.Name = "lstvMessages";
+            this.lstvMessages.Size = new System.Drawing.Size(325, 342);
+            this.lstvMessages.TabIndex = 6;
+            // 
+            // lblReceivedMessages
+            // 
+            this.lblReceivedMessages.AutoSize = true;
+            this.lblReceivedMessages.Location = new System.Drawing.Point(3, 9);
+            this.lblReceivedMessages.Name = "lblReceivedMessages";
+            this.lblReceivedMessages.Size = new System.Drawing.Size(104, 13);
+            this.lblReceivedMessages.TabIndex = 7;
+            this.lblReceivedMessages.Text = "Received Messages";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.lstvMessages);
+            this.panel1.Controls.Add(this.lblReceivedMessages);
+            this.panel1.Location = new System.Drawing.Point(432, 9);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(325, 373);
+            this.panel1.TabIndex = 8;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 280);
+            this.ClientSize = new System.Drawing.Size(769, 388);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.connectBtn);
             this.Controls.Add(this.addressLbl);
             this.Controls.Add(this.addressTbx);
             this.Controls.Add(this.gbxControls);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "WallE Remote Controls";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.gbxControls.ResumeLayout(false);
+            this.pnlMovementControls.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,11 +213,14 @@
         private System.Windows.Forms.TextBox addressTbx;
         private System.Windows.Forms.Label addressLbl;
         private System.Windows.Forms.Button connectBtn;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlMovementControls;
         private System.Windows.Forms.Button btnLeft;
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Button btnRight;
         private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.ListBox lstvMessages;
+        private System.Windows.Forms.Label lblReceivedMessages;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
