@@ -66,7 +66,7 @@
             this.gbxControls.Controls.Add(this.pnlMovementControls);
             this.gbxControls.Location = new System.Drawing.Point(12, 87);
             this.gbxControls.Name = "gbxControls";
-            this.gbxControls.Size = new System.Drawing.Size(423, 295);
+            this.gbxControls.Size = new System.Drawing.Size(261, 295);
             this.gbxControls.TabIndex = 0;
             this.gbxControls.TabStop = false;
             this.gbxControls.Text = "Controls";
@@ -177,7 +177,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.lstvMessages);
             this.panel1.Controls.Add(this.lblReceivedMessages);
-            this.panel1.Location = new System.Drawing.Point(432, 9);
+            this.panel1.Location = new System.Drawing.Point(270, 9);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(325, 373);
             this.panel1.TabIndex = 8;
@@ -186,7 +186,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 388);
+            this.ClientSize = new System.Drawing.Size(607, 388);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.connectBtn);
             this.Controls.Add(this.addressLbl);
