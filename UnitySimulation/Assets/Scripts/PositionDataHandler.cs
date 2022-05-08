@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+public class OnPostionDataEvent : UnityEvent<PositionData> { }
 
 public class PositionDataHandler : MonoBehaviour
 {
@@ -9,15 +12,15 @@ public class PositionDataHandler : MonoBehaviour
     [Range(0, 10)]
     public int positionRoundDecimals = 3;
 
-    Vector2 previousPostion;
-    // private WallEManager wallEManager;
-    // private GameObject wallE;
+    [SerializeField] public OnPostionDataEvent onPositionData;
+    private Vector2 previousPostion;
 
-    // Start is called before the first frame update
+    void Awake() {
+        onPositionData = new OnPostionDataEvent();
+    }
+
     void Start()
     {
-        // wallEManager = GetComponent<WallEManager>();
-        // wallE = wallEManager.wallE;
         previousPostion = new Vector2(transform.position.x * positionScale, transform.position.z * positionScale);
         StartCoroutine("SendPositionDataWithDelay", 1f);
     }
@@ -41,8 +44,7 @@ public class PositionDataHandler : MonoBehaviour
             x = System.Math.Round((double)relativePostion.x, positionRoundDecimals, System.MidpointRounding.AwayFromZero),
             y = System.Math.Round((double)relativePostion.y, positionRoundDecimals, System.MidpointRounding.AwayFromZero),
         };
-        // wallEManager.SendData(data);
-
         previousPostion = postion;
+        onPositionData.Invoke(data);
     }
 }
