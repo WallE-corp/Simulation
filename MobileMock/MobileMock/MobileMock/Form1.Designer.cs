@@ -73,6 +73,7 @@
             this.btnConnect.TabIndex = 2;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // gbxControls
             // 
@@ -105,6 +106,8 @@
             this.btnUp.TabIndex = 3;
             this.btnUp.Text = "^";
             this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveForwardStart);
+            this.btnUp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveForwardStop);
             // 
             // btnRight
             // 
@@ -114,6 +117,8 @@
             this.btnRight.TabIndex = 2;
             this.btnRight.Text = ">";
             this.btnRight.UseVisualStyleBackColor = true;
+            this.btnRight.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveRightStart);
+            this.btnRight.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveRightStop);
             // 
             // btnDown
             // 
@@ -123,7 +128,8 @@
             this.btnDown.TabIndex = 1;
             this.btnDown.Text = "v";
             this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.UseWaitCursor = true;
+            this.btnDown.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveBackwardStart);
+            this.btnDown.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveBackwardStop);
             // 
             // btnLeft
             // 
@@ -133,6 +139,8 @@
             this.btnLeft.TabIndex = 0;
             this.btnLeft.Text = "<";
             this.btnLeft.UseVisualStyleBackColor = true;
+            this.btnLeft.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveLeftStart);
+            this.btnLeft.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveLeftStop);
             // 
             // btnMode
             // 
@@ -151,6 +159,7 @@
             this.btnRegisterAsRemote.TabIndex = 0;
             this.btnRegisterAsRemote.Text = "Register as remote";
             this.btnRegisterAsRemote.UseVisualStyleBackColor = true;
+            this.btnRegisterAsRemote.Click += new System.EventHandler(this.btnRegisterAsRemote_Click);
             // 
             // gbxReceivedMessages
             // 
@@ -200,6 +209,8 @@
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.tbxServerAddress);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.Name = "mainForm";
             this.Text = "WallE Mobile Mock";
             this.Load += new System.EventHandler(this.mainForm_Load);
