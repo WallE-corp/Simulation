@@ -2,7 +2,6 @@
 ## Contents
 * [Unity Simulation](#unity-simulation)
 * [Remote Controller](#remote-controller)
-* [(deprecated)C++ Simulation](#deprecated-c-simulation)
 
 ## Unity Simulation
 A simulation done with the Unity game engine. Used to simulation how the WallE moves in an environment.
@@ -44,18 +43,4 @@ For now ask me (Tifye) for the installer.
 Requirements
 *   Visual Studio 2022
     - with the `.NET desktop development` workload
-
-## (deprecated) C++ Simulation 
-## Linux
-Requires a modern c++ compiler.
-To compile use the command:
-
-`g++ -o YourProgName YourSource.cpp -lX11 -lGL -lpthread -lpng -lstdc++fs -std=c++17 <link extra cpp here>`
-
-## Windows
-
-* latest G++ via MSYS2 MINGW [install from here](https://www.msys2.org/).
-  - *Note* For IDEs other than Visual Studio follow: https://www.youtube.com/watch?v=jnI1gMxtrB4
-* linked libraries needed:
-  - `user32 gdi32 opengl32 gdiplus Shlwapi dwmapi stdc++fs`
-* Cpp standard `c++17`
+*   .Net Framework 6.0
