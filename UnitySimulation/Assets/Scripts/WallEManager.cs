@@ -32,7 +32,6 @@ public class WallEManager : MonoBehaviour, WSClientDelegate
     public void SendData(MessageData data)
     {
         string dataJson = JsonUtility.ToJson(data);
-        Debug.Log(dataJson);
-        //wsClient.SendMessage(dataJson);
+        wsClient.SendMessage(dataJson);
     }
 }
