@@ -52,11 +52,13 @@
             this.lstbxReceivedMessages = new System.Windows.Forms.ListBox();
             this.lblObstacleEvents = new System.Windows.Forms.Label();
             this.lstbxObstacleEvents = new System.Windows.Forms.ListBox();
+            this.lstbxReceivedPositionData = new System.Windows.Forms.ListBox();
             this.gbxControls.SuspendLayout();
             this.pnlMovementControls.SuspendLayout();
             this.gbxReceivedMessages.SuspendLayout();
             this.gbxSelectObstacleEventData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxObstacleEventImage)).BeginInit();
+            this.gbxPositionData.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -268,6 +270,7 @@
             // 
             // gbxPositionData
             // 
+            this.gbxPositionData.Controls.Add(this.lstbxReceivedPositionData);
             this.gbxPositionData.Location = new System.Drawing.Point(357, 22);
             this.gbxPositionData.Name = "gbxPositionData";
             this.gbxPositionData.Size = new System.Drawing.Size(200, 127);
@@ -305,6 +308,15 @@
             this.lstbxObstacleEvents.TabIndex = 0;
             this.lstbxObstacleEvents.SelectedIndexChanged += new System.EventHandler(this.lstbxObstacleEvents_SelectedIndexChanged);
             // 
+            // lstbxReceivedPositionData
+            // 
+            this.lstbxReceivedPositionData.FormattingEnabled = true;
+            this.lstbxReceivedPositionData.ItemHeight = 15;
+            this.lstbxReceivedPositionData.Location = new System.Drawing.Point(6, 22);
+            this.lstbxReceivedPositionData.Name = "lstbxReceivedPositionData";
+            this.lstbxReceivedPositionData.Size = new System.Drawing.Size(188, 94);
+            this.lstbxReceivedPositionData.TabIndex = 0;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -327,6 +339,7 @@
             this.gbxSelectObstacleEventData.ResumeLayout(false);
             this.gbxSelectObstacleEventData.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxObstacleEventImage)).EndInit();
+            this.gbxPositionData.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -358,5 +371,6 @@
         private ListBox lstbxReceivedMessages;
         private GroupBox gbxPositionData;
         private GroupBox gbxSelectObstacleEventData;
+        private ListBox lstbxReceivedPositionData;
     }
 }
