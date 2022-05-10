@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FieldOfView : MonoBehaviour
 {
-        public float viewRadius = 2;
+    public float viewRadius = 2;
     [Range(0, 360)]
     public float viewAngle = 90;
     [Range (0, 360)]
     public int numberOfRays = 6;
     public LayerMask objectMask;
+
+    public UnityEvent onObjectEnter;
+    public UnityEvent onOBjectLeave;
 
     [HideInInspector]
     public bool objectDetected;
@@ -18,6 +22,8 @@ public class FieldOfView : MonoBehaviour
 
     private void Start()
     {
+        if (onObjectEnter == null) onObjectEnter = new UnityEvent();
+        if (onOBjectLeave == null) onOBjectLeave = new UnityEvent();
         StartCoroutine("FindObjectsWithDelay", .1f);
     }
 
@@ -38,12 +44,20 @@ public class FieldOfView : MonoBehaviour
             Vector3 rayDir = DirFromAngle((rayAngleIncrement * i) - viewAngle/2, false);
             if (Physics.Raycast(transform.position, rayDir, out objectHit, viewRadius, objectMask))
             {
-                objectDetected = true;
+                if (!objectDetected)
+                {
+                    if (onObjectEnter != null) onObjectEnter.Invoke();
+                    objectDetected = true;
+                }
                 return;
             }
         }
 
-        objectDetected = false;
+        if (objectDetected)
+        {
+            if (onOBjectLeave != null) onOBjectLeave.Invoke();
+            objectDetected = false;
+        }
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
@@ -60,7 +74,8 @@ public class FieldOfView : MonoBehaviour
 
     public void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.yellow;
+        if (objectDetected) Gizmos.color = Color.red;
         GizmosExtensions.DrawWireArc(transform.position, transform.forward, viewAngle, viewRadius, 5);
     }
 }

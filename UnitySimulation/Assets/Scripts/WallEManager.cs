@@ -34,4 +34,20 @@ public class WallEManager : MonoBehaviour, WSClientDelegate
         string dataJson = JsonUtility.ToJson(data);
         wsClient.SendMessage(dataJson);
     }
+
+    public void OnObstacleEnter() {
+        Debug.Log("Obstacle entered");
+    }
+
+    public void OnObstacleLeave() {
+        Debug.Log("Obstacle left");
+    }
+
+    public void OnBorderEnter() {
+        Debug.Log("Border entered");
+    }
+
+    public void OnBorderLeave() {
+        Debug.Log("Border left");
+    }
 }
