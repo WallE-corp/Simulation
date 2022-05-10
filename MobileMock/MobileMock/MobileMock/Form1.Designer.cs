@@ -32,6 +32,7 @@
             this.tbxServerAddress = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.gbxControls = new System.Windows.Forms.GroupBox();
+            this.btnStartNewMap = new System.Windows.Forms.Button();
             this.pnlMovementControls = new System.Windows.Forms.Panel();
             this.btnUp = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
@@ -40,14 +41,22 @@
             this.btnMode = new System.Windows.Forms.Button();
             this.btnRegisterAsRemote = new System.Windows.Forms.Button();
             this.gbxReceivedMessages = new System.Windows.Forms.GroupBox();
-            this.lblObstacleEventData = new System.Windows.Forms.Label();
-            this.pbxObstacle = new System.Windows.Forms.PictureBox();
+            this.gbxSelectObstacleEventData = new System.Windows.Forms.GroupBox();
+            this.lblObstacleEventDocumentId = new System.Windows.Forms.Label();
+            this.lblObstacleEventLabel = new System.Windows.Forms.Label();
+            this.lblObstacleEventPosition = new System.Windows.Forms.Label();
+            this.lblObstacleEventUrl = new System.Windows.Forms.Label();
+            this.pbxObstacleEventImage = new System.Windows.Forms.PictureBox();
+            this.btnCopyObstacleEventImageUrl = new System.Windows.Forms.Button();
+            this.gbxPositionData = new System.Windows.Forms.GroupBox();
             this.lstbxReceivedMessages = new System.Windows.Forms.ListBox();
-            this.btnStartNewMap = new System.Windows.Forms.Button();
+            this.lblObstacleEvents = new System.Windows.Forms.Label();
+            this.lstbxObstacleEvents = new System.Windows.Forms.ListBox();
             this.gbxControls.SuspendLayout();
             this.pnlMovementControls.SuspendLayout();
             this.gbxReceivedMessages.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxObstacle)).BeginInit();
+            this.gbxSelectObstacleEventData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxObstacleEventImage)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -84,10 +93,19 @@
             this.gbxControls.Controls.Add(this.btnRegisterAsRemote);
             this.gbxControls.Location = new System.Drawing.Point(12, 56);
             this.gbxControls.Name = "gbxControls";
-            this.gbxControls.Size = new System.Drawing.Size(460, 416);
+            this.gbxControls.Size = new System.Drawing.Size(272, 306);
             this.gbxControls.TabIndex = 3;
             this.gbxControls.TabStop = false;
             this.gbxControls.Text = "Controls";
+            // 
+            // btnStartNewMap
+            // 
+            this.btnStartNewMap.Location = new System.Drawing.Point(9, 51);
+            this.btnStartNewMap.Name = "btnStartNewMap";
+            this.btnStartNewMap.Size = new System.Drawing.Size(125, 23);
+            this.btnStartNewMap.TabIndex = 3;
+            this.btnStartNewMap.Text = "Start new map";
+            this.btnStartNewMap.UseVisualStyleBackColor = true;
             // 
             // pnlMovementControls
             // 
@@ -95,14 +113,14 @@
             this.pnlMovementControls.Controls.Add(this.btnRight);
             this.pnlMovementControls.Controls.Add(this.btnDown);
             this.pnlMovementControls.Controls.Add(this.btnLeft);
-            this.pnlMovementControls.Location = new System.Drawing.Point(9, 255);
+            this.pnlMovementControls.Location = new System.Drawing.Point(6, 128);
             this.pnlMovementControls.Name = "pnlMovementControls";
-            this.pnlMovementControls.Size = new System.Drawing.Size(233, 155);
+            this.pnlMovementControls.Size = new System.Drawing.Size(257, 169);
             this.pnlMovementControls.TabIndex = 2;
             // 
             // btnUp
             // 
-            this.btnUp.Location = new System.Drawing.Point(81, 2);
+            this.btnUp.Location = new System.Drawing.Point(93, 2);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(72, 72);
             this.btnUp.TabIndex = 3;
@@ -113,7 +131,7 @@
             // 
             // btnRight
             // 
-            this.btnRight.Location = new System.Drawing.Point(158, 80);
+            this.btnRight.Location = new System.Drawing.Point(182, 87);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(72, 72);
             this.btnRight.TabIndex = 2;
@@ -124,7 +142,7 @@
             // 
             // btnDown
             // 
-            this.btnDown.Location = new System.Drawing.Point(81, 80);
+            this.btnDown.Location = new System.Drawing.Point(93, 87);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(72, 72);
             this.btnDown.TabIndex = 1;
@@ -135,7 +153,7 @@
             // 
             // btnLeft
             // 
-            this.btnLeft.Location = new System.Drawing.Point(3, 80);
+            this.btnLeft.Location = new System.Drawing.Point(3, 87);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(72, 72);
             this.btnLeft.TabIndex = 0;
@@ -146,7 +164,7 @@
             // 
             // btnMode
             // 
-            this.btnMode.Location = new System.Drawing.Point(9, 51);
+            this.btnMode.Location = new System.Drawing.Point(138, 22);
             this.btnMode.Name = "btnMode";
             this.btnMode.Size = new System.Drawing.Size(125, 23);
             this.btnMode.TabIndex = 1;
@@ -165,56 +183,133 @@
             // 
             // gbxReceivedMessages
             // 
-            this.gbxReceivedMessages.Controls.Add(this.lblObstacleEventData);
-            this.gbxReceivedMessages.Controls.Add(this.pbxObstacle);
+            this.gbxReceivedMessages.Controls.Add(this.gbxSelectObstacleEventData);
+            this.gbxReceivedMessages.Controls.Add(this.gbxPositionData);
             this.gbxReceivedMessages.Controls.Add(this.lstbxReceivedMessages);
-            this.gbxReceivedMessages.Location = new System.Drawing.Point(478, 9);
+            this.gbxReceivedMessages.Controls.Add(this.lblObstacleEvents);
+            this.gbxReceivedMessages.Controls.Add(this.lstbxObstacleEvents);
+            this.gbxReceivedMessages.Location = new System.Drawing.Point(290, 12);
             this.gbxReceivedMessages.Name = "gbxReceivedMessages";
-            this.gbxReceivedMessages.Size = new System.Drawing.Size(411, 463);
+            this.gbxReceivedMessages.Size = new System.Drawing.Size(566, 350);
             this.gbxReceivedMessages.TabIndex = 4;
             this.gbxReceivedMessages.TabStop = false;
-            this.gbxReceivedMessages.Text = "Received Message";
+            this.gbxReceivedMessages.Text = "Received Messages";
             // 
-            // lblObstacleEventData
+            // gbxSelectObstacleEventData
             // 
-            this.lblObstacleEventData.AutoSize = true;
-            this.lblObstacleEventData.Location = new System.Drawing.Point(6, 283);
-            this.lblObstacleEventData.Name = "lblObstacleEventData";
-            this.lblObstacleEventData.Size = new System.Drawing.Size(112, 15);
-            this.lblObstacleEventData.TabIndex = 2;
-            this.lblObstacleEventData.Text = "Obstacle Event Data";
+            this.gbxSelectObstacleEventData.Controls.Add(this.lblObstacleEventDocumentId);
+            this.gbxSelectObstacleEventData.Controls.Add(this.lblObstacleEventLabel);
+            this.gbxSelectObstacleEventData.Controls.Add(this.lblObstacleEventPosition);
+            this.gbxSelectObstacleEventData.Controls.Add(this.lblObstacleEventUrl);
+            this.gbxSelectObstacleEventData.Controls.Add(this.pbxObstacleEventImage);
+            this.gbxSelectObstacleEventData.Controls.Add(this.btnCopyObstacleEventImageUrl);
+            this.gbxSelectObstacleEventData.Location = new System.Drawing.Point(203, 170);
+            this.gbxSelectObstacleEventData.Name = "gbxSelectObstacleEventData";
+            this.gbxSelectObstacleEventData.Size = new System.Drawing.Size(354, 171);
+            this.gbxSelectObstacleEventData.TabIndex = 11;
+            this.gbxSelectObstacleEventData.TabStop = false;
+            this.gbxSelectObstacleEventData.Text = "Selected Obstacle Event Data";
             // 
-            // pbxObstacle
+            // lblObstacleEventDocumentId
             // 
-            this.pbxObstacle.Location = new System.Drawing.Point(203, 283);
-            this.pbxObstacle.Name = "pbxObstacle";
-            this.pbxObstacle.Size = new System.Drawing.Size(202, 174);
-            this.pbxObstacle.TabIndex = 1;
-            this.pbxObstacle.TabStop = false;
+            this.lblObstacleEventDocumentId.AutoSize = true;
+            this.lblObstacleEventDocumentId.Location = new System.Drawing.Point(6, 19);
+            this.lblObstacleEventDocumentId.Name = "lblObstacleEventDocumentId";
+            this.lblObstacleEventDocumentId.Size = new System.Drawing.Size(73, 15);
+            this.lblObstacleEventDocumentId.TabIndex = 3;
+            this.lblObstacleEventDocumentId.Text = "DocumentId";
+            // 
+            // lblObstacleEventLabel
+            // 
+            this.lblObstacleEventLabel.AutoSize = true;
+            this.lblObstacleEventLabel.Location = new System.Drawing.Point(6, 34);
+            this.lblObstacleEventLabel.Name = "lblObstacleEventLabel";
+            this.lblObstacleEventLabel.Size = new System.Drawing.Size(35, 15);
+            this.lblObstacleEventLabel.TabIndex = 4;
+            this.lblObstacleEventLabel.Text = "Label";
+            // 
+            // lblObstacleEventPosition
+            // 
+            this.lblObstacleEventPosition.AutoSize = true;
+            this.lblObstacleEventPosition.Location = new System.Drawing.Point(6, 49);
+            this.lblObstacleEventPosition.Name = "lblObstacleEventPosition";
+            this.lblObstacleEventPosition.Size = new System.Drawing.Size(50, 15);
+            this.lblObstacleEventPosition.TabIndex = 5;
+            this.lblObstacleEventPosition.Text = "Position";
+            // 
+            // lblObstacleEventUrl
+            // 
+            this.lblObstacleEventUrl.Location = new System.Drawing.Point(6, 64);
+            this.lblObstacleEventUrl.Name = "lblObstacleEventUrl";
+            this.lblObstacleEventUrl.Size = new System.Drawing.Size(164, 15);
+            this.lblObstacleEventUrl.TabIndex = 6;
+            this.lblObstacleEventUrl.Text = "URL";
+            this.lblObstacleEventUrl.Click += new System.EventHandler(this.lblObstacleEventUrl_Click);
+            // 
+            // pbxObstacleEventImage
+            // 
+            this.pbxObstacleEventImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pbxObstacleEventImage.Location = new System.Drawing.Point(185, 19);
+            this.pbxObstacleEventImage.Name = "pbxObstacleEventImage";
+            this.pbxObstacleEventImage.Size = new System.Drawing.Size(163, 146);
+            this.pbxObstacleEventImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxObstacleEventImage.TabIndex = 1;
+            this.pbxObstacleEventImage.TabStop = false;
+            // 
+            // btnCopyObstacleEventImageUrl
+            // 
+            this.btnCopyObstacleEventImageUrl.Location = new System.Drawing.Point(6, 82);
+            this.btnCopyObstacleEventImageUrl.Name = "btnCopyObstacleEventImageUrl";
+            this.btnCopyObstacleEventImageUrl.Size = new System.Drawing.Size(112, 23);
+            this.btnCopyObstacleEventImageUrl.TabIndex = 7;
+            this.btnCopyObstacleEventImageUrl.Text = "Copy URL";
+            this.btnCopyObstacleEventImageUrl.UseVisualStyleBackColor = true;
+            this.btnCopyObstacleEventImageUrl.Click += new System.EventHandler(this.btnCopyObstacleEventImageUrl_Click);
+            // 
+            // gbxPositionData
+            // 
+            this.gbxPositionData.Location = new System.Drawing.Point(357, 22);
+            this.gbxPositionData.Name = "gbxPositionData";
+            this.gbxPositionData.Size = new System.Drawing.Size(200, 127);
+            this.gbxPositionData.TabIndex = 10;
+            this.gbxPositionData.TabStop = false;
+            this.gbxPositionData.Text = "Received Position Data";
             // 
             // lstbxReceivedMessages
             // 
             this.lstbxReceivedMessages.FormattingEnabled = true;
             this.lstbxReceivedMessages.ItemHeight = 15;
-            this.lstbxReceivedMessages.Location = new System.Drawing.Point(6, 18);
+            this.lstbxReceivedMessages.Location = new System.Drawing.Point(6, 22);
             this.lstbxReceivedMessages.Name = "lstbxReceivedMessages";
-            this.lstbxReceivedMessages.Size = new System.Drawing.Size(399, 259);
-            this.lstbxReceivedMessages.TabIndex = 0;
+            this.lstbxReceivedMessages.Size = new System.Drawing.Size(345, 124);
+            this.lstbxReceivedMessages.TabIndex = 9;
+            this.lstbxReceivedMessages.SelectedIndexChanged += new System.EventHandler(this.lstbxReceivedMessages_SelectedIndexChanged);
             // 
-            // btnStartNewMap
+            // lblObstacleEvents
             // 
-            this.btnStartNewMap.Location = new System.Drawing.Point(9, 80);
-            this.btnStartNewMap.Name = "btnStartNewMap";
-            this.btnStartNewMap.Size = new System.Drawing.Size(125, 23);
-            this.btnStartNewMap.TabIndex = 3;
-            this.btnStartNewMap.Text = "Start new map";
-            this.btnStartNewMap.UseVisualStyleBackColor = true;
+            this.lblObstacleEvents.AutoSize = true;
+            this.lblObstacleEvents.Location = new System.Drawing.Point(6, 154);
+            this.lblObstacleEvents.Name = "lblObstacleEvents";
+            this.lblObstacleEvents.Size = new System.Drawing.Size(140, 15);
+            this.lblObstacleEvents.TabIndex = 8;
+            this.lblObstacleEvents.Text = "Received Obstacle Events";
+            this.lblObstacleEvents.Click += new System.EventHandler(this.lblObstacleEvents_Click);
+            // 
+            // lstbxObstacleEvents
+            // 
+            this.lstbxObstacleEvents.FormattingEnabled = true;
+            this.lstbxObstacleEvents.ItemHeight = 15;
+            this.lstbxObstacleEvents.Location = new System.Drawing.Point(6, 172);
+            this.lstbxObstacleEvents.Name = "lstbxObstacleEvents";
+            this.lstbxObstacleEvents.Size = new System.Drawing.Size(191, 169);
+            this.lstbxObstacleEvents.TabIndex = 0;
+            this.lstbxObstacleEvents.SelectedIndexChanged += new System.EventHandler(this.lstbxObstacleEvents_SelectedIndexChanged);
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(901, 484);
+            this.ClientSize = new System.Drawing.Size(865, 369);
             this.Controls.Add(this.gbxReceivedMessages);
             this.Controls.Add(this.gbxControls);
             this.Controls.Add(this.btnConnect);
@@ -229,7 +324,9 @@
             this.pnlMovementControls.ResumeLayout(false);
             this.gbxReceivedMessages.ResumeLayout(false);
             this.gbxReceivedMessages.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxObstacle)).EndInit();
+            this.gbxSelectObstacleEventData.ResumeLayout(false);
+            this.gbxSelectObstacleEventData.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxObstacleEventImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -249,9 +346,17 @@
         private Button btnMode;
         private Button btnRegisterAsRemote;
         private GroupBox gbxReceivedMessages;
-        private Label lblObstacleEventData;
-        private PictureBox pbxObstacle;
-        private ListBox lstbxReceivedMessages;
+        private PictureBox pbxObstacleEventImage;
+        private ListBox lstbxObstacleEvents;
         private Button btnStartNewMap;
+        private Label lblObstacleEventUrl;
+        private Label lblObstacleEventPosition;
+        private Label lblObstacleEventLabel;
+        private Label lblObstacleEventDocumentId;
+        private Button btnCopyObstacleEventImageUrl;
+        private Label lblObstacleEvents;
+        private ListBox lstbxReceivedMessages;
+        private GroupBox gbxPositionData;
+        private GroupBox gbxSelectObstacleEventData;
     }
 }

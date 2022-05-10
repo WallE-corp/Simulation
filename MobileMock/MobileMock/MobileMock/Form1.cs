@@ -54,22 +54,45 @@ namespace MobileMock
                 return;
             }
 
-            dynamic parsedCommand;
             switch ((COMMAND_TYPE)command.type)
             {
                 case COMMAND_TYPE.OBSTACLE_EVENT:
                     WallEOBstacleEventCommand obstacleEvent = JsonConvert.DeserializeObject<WallEOBstacleEventCommand>(jsonString);
-                    parsedCommand = obstacleEvent;
+                    lstbxObstacleEvents.Invoke((MethodInvoker)delegate
+                    {
+                        lstbxObstacleEvents.Items.Add(obstacleEvent);
+                    });
                     break;
                 default:
+                    lstbxReceivedMessages.Invoke((MethodInvoker)delegate
+                    {
+                        lstbxReceivedMessages.Items.Add(jsonString);
+                    });
                     return;
                     break;
             }
 
-            lstbxReceivedMessages.Invoke((MethodInvoker)delegate
-            {
-                lstbxReceivedMessages.Items.Add(parsedCommand);
-            });
+
+        }
+
+        private void lstbxReceivedMessages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstbxObstacleEvents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WallEOBstacleEventCommand wallEOBstacleEventCommand = (WallEOBstacleEventCommand)lstbxObstacleEvents.SelectedItem;
+            UpdateSelectedObstacleEvent(wallEOBstacleEventCommand.data);
+        }
+
+        private void UpdateSelectedObstacleEvent(WallEObstacleEventData data)
+        {
+            lblObstacleEventDocumentId.Text = data.documentId;
+            lblObstacleEventLabel.Text = data.label;
+            lblObstacleEventPosition.Text = $"{data.x}, {data.y}";
+            lblObstacleEventUrl.Text = data.imageUrl;
+            pbxObstacleEventImage.Load(data.imageUrl);
         }
 
         private WallEMovementCommand CreateMovementCommand(string movement, string action)
@@ -189,6 +212,22 @@ namespace MobileMock
             EmitMovementCommand("right", "stop");
         }
 
+
         #endregion
+
+        private void lblObstacleEventUrl_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(lblObstacleEventUrl.Text);
+        }
+
+        private void btnCopyObstacleEventImageUrl_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(lblObstacleEventUrl.Text);
+        }
+
+        private void lblObstacleEvents_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
