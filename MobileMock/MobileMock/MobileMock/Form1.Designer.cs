@@ -49,10 +49,10 @@
             this.pbxObstacleEventImage = new System.Windows.Forms.PictureBox();
             this.btnCopyObstacleEventImageUrl = new System.Windows.Forms.Button();
             this.gbxPositionData = new System.Windows.Forms.GroupBox();
+            this.lstbxReceivedPositionData = new System.Windows.Forms.ListBox();
             this.lstbxReceivedMessages = new System.Windows.Forms.ListBox();
             this.lblObstacleEvents = new System.Windows.Forms.Label();
             this.lstbxObstacleEvents = new System.Windows.Forms.ListBox();
-            this.lstbxReceivedPositionData = new System.Windows.Forms.ListBox();
             this.gbxControls.SuspendLayout();
             this.pnlMovementControls.SuspendLayout();
             this.gbxReceivedMessages.SuspendLayout();
@@ -205,9 +205,9 @@
             this.gbxSelectObstacleEventData.Controls.Add(this.lblObstacleEventUrl);
             this.gbxSelectObstacleEventData.Controls.Add(this.pbxObstacleEventImage);
             this.gbxSelectObstacleEventData.Controls.Add(this.btnCopyObstacleEventImageUrl);
-            this.gbxSelectObstacleEventData.Location = new System.Drawing.Point(203, 170);
+            this.gbxSelectObstacleEventData.Location = new System.Drawing.Point(203, 154);
             this.gbxSelectObstacleEventData.Name = "gbxSelectObstacleEventData";
-            this.gbxSelectObstacleEventData.Size = new System.Drawing.Size(354, 171);
+            this.gbxSelectObstacleEventData.Size = new System.Drawing.Size(354, 187);
             this.gbxSelectObstacleEventData.TabIndex = 11;
             this.gbxSelectObstacleEventData.TabStop = false;
             this.gbxSelectObstacleEventData.Text = "Selected Obstacle Event Data";
@@ -251,9 +251,9 @@
             // pbxObstacleEventImage
             // 
             this.pbxObstacleEventImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pbxObstacleEventImage.Location = new System.Drawing.Point(185, 19);
+            this.pbxObstacleEventImage.Location = new System.Drawing.Point(180, 19);
             this.pbxObstacleEventImage.Name = "pbxObstacleEventImage";
-            this.pbxObstacleEventImage.Size = new System.Drawing.Size(163, 146);
+            this.pbxObstacleEventImage.Size = new System.Drawing.Size(168, 158);
             this.pbxObstacleEventImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxObstacleEventImage.TabIndex = 1;
             this.pbxObstacleEventImage.TabStop = false;
@@ -271,12 +271,21 @@
             // gbxPositionData
             // 
             this.gbxPositionData.Controls.Add(this.lstbxReceivedPositionData);
-            this.gbxPositionData.Location = new System.Drawing.Point(357, 22);
+            this.gbxPositionData.Location = new System.Drawing.Point(377, 22);
             this.gbxPositionData.Name = "gbxPositionData";
-            this.gbxPositionData.Size = new System.Drawing.Size(200, 127);
+            this.gbxPositionData.Size = new System.Drawing.Size(180, 127);
             this.gbxPositionData.TabIndex = 10;
             this.gbxPositionData.TabStop = false;
             this.gbxPositionData.Text = "Received Position Data";
+            // 
+            // lstbxReceivedPositionData
+            // 
+            this.lstbxReceivedPositionData.FormattingEnabled = true;
+            this.lstbxReceivedPositionData.ItemHeight = 15;
+            this.lstbxReceivedPositionData.Location = new System.Drawing.Point(6, 22);
+            this.lstbxReceivedPositionData.Name = "lstbxReceivedPositionData";
+            this.lstbxReceivedPositionData.Size = new System.Drawing.Size(168, 94);
+            this.lstbxReceivedPositionData.TabIndex = 0;
             // 
             // lstbxReceivedMessages
             // 
@@ -284,7 +293,7 @@
             this.lstbxReceivedMessages.ItemHeight = 15;
             this.lstbxReceivedMessages.Location = new System.Drawing.Point(6, 22);
             this.lstbxReceivedMessages.Name = "lstbxReceivedMessages";
-            this.lstbxReceivedMessages.Size = new System.Drawing.Size(345, 124);
+            this.lstbxReceivedMessages.Size = new System.Drawing.Size(365, 124);
             this.lstbxReceivedMessages.TabIndex = 9;
             this.lstbxReceivedMessages.SelectedIndexChanged += new System.EventHandler(this.lstbxReceivedMessages_SelectedIndexChanged);
             // 
@@ -308,15 +317,6 @@
             this.lstbxObstacleEvents.TabIndex = 0;
             this.lstbxObstacleEvents.SelectedIndexChanged += new System.EventHandler(this.lstbxObstacleEvents_SelectedIndexChanged);
             // 
-            // lstbxReceivedPositionData
-            // 
-            this.lstbxReceivedPositionData.FormattingEnabled = true;
-            this.lstbxReceivedPositionData.ItemHeight = 15;
-            this.lstbxReceivedPositionData.Location = new System.Drawing.Point(6, 22);
-            this.lstbxReceivedPositionData.Name = "lstbxReceivedPositionData";
-            this.lstbxReceivedPositionData.Size = new System.Drawing.Size(188, 94);
-            this.lstbxReceivedPositionData.TabIndex = 0;
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -332,6 +332,8 @@
             this.Name = "mainForm";
             this.Text = "WallE Mobile Mock";
             this.Load += new System.EventHandler(this.mainForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.gbxControls.ResumeLayout(false);
             this.pnlMovementControls.ResumeLayout(false);
             this.gbxReceivedMessages.ResumeLayout(false);

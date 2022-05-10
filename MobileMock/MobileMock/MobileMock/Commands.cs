@@ -3,7 +3,8 @@
     public enum COMMAND_TYPE {
         MOVEMENT = 4,
         REGISTRATION = 6,
-        OBSTACLE_EVENT = 9
+        OBSTACLE_EVENT = 9,
+        POSITION_DATA = 11
     }
 
 
@@ -52,7 +53,24 @@
 
         public override string ToString()
         {
-            return $"Obstacle Event: {data.label}, [{data.x}, {data.y}]";
+            decimal x = Math.Round(data.x, 3, MidpointRounding.AwayFromZero);
+            decimal y = Math.Round(data.y, 3, MidpointRounding.AwayFromZero);
+            return $"Obstacle Event: {data.label}, {x}, {y}]";
+        }
+    }
+
+    public class WallEPositionData
+    {
+        public decimal x;
+        public decimal y;
+    }
+    public class WallEPositionDataCommand : WallECommand
+    {
+        public COMMAND_TYPE type { get; } = COMMAND_TYPE.POSITION_DATA;
+        public WallEPositionData data { get; set; }
+        public override string ToString()
+        {
+            return $"{Math.Round(data.x, 3, MidpointRounding.AwayFromZero)}, {Math.Round(data.y, 3, MidpointRounding.AwayFromZero)}";
         }
     }
 }

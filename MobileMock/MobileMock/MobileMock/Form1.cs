@@ -63,6 +63,14 @@ namespace MobileMock
                         lstbxObstacleEvents.Items.Add(obstacleEvent);
                     });
                     break;
+                case COMMAND_TYPE.POSITION_DATA:
+                    WallEPositionDataCommand postionCommand = JsonConvert.DeserializeObject<WallEPositionDataCommand>(jsonString);
+                    lstbxReceivedPositionData.Invoke((MethodInvoker)delegate
+                    {
+                        lstbxReceivedPositionData.Items.Insert(0, postionCommand);
+                        if (lstbxReceivedPositionData.Items.Count > 10) lstbxReceivedPositionData.Items.RemoveAt(lstbxReceivedPositionData.Items.Count - 1);
+                    });
+                    break;
                 default:
                     lstbxReceivedMessages.Invoke((MethodInvoker)delegate
                     {
@@ -90,7 +98,9 @@ namespace MobileMock
         {
             lblObstacleEventDocumentId.Text = data.documentId;
             lblObstacleEventLabel.Text = data.label;
-            lblObstacleEventPosition.Text = $"{data.x}, {data.y}";
+            decimal x = Math.Round(data.x, 3, MidpointRounding.AwayFromZero);
+            decimal y = Math.Round(data.y, 3, MidpointRounding.AwayFromZero);
+            lblObstacleEventPosition.Text = $"{x}, {y}";
             lblObstacleEventUrl.Text = data.imageUrl;
             pbxObstacleEventImage.Load(data.imageUrl);
         }
