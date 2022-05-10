@@ -60,7 +60,13 @@ namespace MobileMock
                     WallEOBstacleEventCommand obstacleEvent = JsonConvert.DeserializeObject<WallEOBstacleEventCommand>(jsonString);
                     lstbxObstacleEvents.Invoke((MethodInvoker)delegate
                     {
-                        lstbxObstacleEvents.Items.Add(obstacleEvent);
+                        lstbxObstacleEvents.Items.Insert(0, obstacleEvent);
+                        if (lstbxObstacleEvents.Items.Count > 1)
+                        {
+                            int lastIndex = lstbxObstacleEvents.Items.Count - 1;
+                            if (lstbxObstacleEvents.SelectedIndex == lastIndex) lstbxObstacleEvents.ClearSelected();
+                            lstbxObstacleEvents.Items.RemoveAt(lastIndex);
+                        }
                     });
                     break;
                 case COMMAND_TYPE.POSITION_DATA:
@@ -91,6 +97,7 @@ namespace MobileMock
         private void lstbxObstacleEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
             WallEOBstacleEventCommand wallEOBstacleEventCommand = (WallEOBstacleEventCommand)lstbxObstacleEvents.SelectedItem;
+            if (wallEOBstacleEventCommand == null) return;
             UpdateSelectedObstacleEvent(wallEOBstacleEventCommand.data);
         }
 

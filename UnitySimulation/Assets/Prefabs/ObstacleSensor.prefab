@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewRadius: 2
-  viewAngle: 90
+  viewAngle: 60
   numberOfRays: 9
   objectMask:
     serializedVersion: 2

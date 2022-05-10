@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[Serializable]
-public abstract class MessageData
+public interface IMessageData
 {
-    static public int type;
+    public int Type { get; }
 }

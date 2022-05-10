@@ -29,7 +29,7 @@ public class WallEManager : MonoBehaviour, WSClientDelegate
         remoteController.HandleMovementCommand(mc);
     }
 
-    public void SendData(MessageData data)
+    public void SendData(IMessageData data)
     {
         string dataJson = JsonUtility.ToJson(data);
         wsClient.SendMessage(dataJson);
@@ -37,6 +37,12 @@ public class WallEManager : MonoBehaviour, WSClientDelegate
 
     public void OnObstacleEnter() {
         Debug.Log("Obstacle entered");
+        OBstacleEventCommand oec = new OBstacleEventCommand();
+        TakeScreenShot tss = GetComponent<TakeScreenShot>();
+        string path = Application.dataPath + "/screenshot.png";
+        tss.TakeScreenshot(path);
+        oec.imagePath =path;
+        SendData(oec);
     }
 
     public void OnObstacleLeave() {
