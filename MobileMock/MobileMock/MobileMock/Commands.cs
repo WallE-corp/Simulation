@@ -1,29 +1,27 @@
 ﻿namespace MobileMock
 {
+    public enum COMMAND_TYPE {
+        MOVEMENT = 4,
+        REGISTRATION = 6,
+        OBSTACLE_EVENT = 9
+    }
+
+
+
+    public class WallECommand
+    {
+        public int type { get; }
+    }
+
     public class WallEMovementCommandData
     {
         public string movement;
         public string action;
     }
-
-    public abstract class WallECommand
-    {
-        public abstract int type
-        {
-            get;
-        }
-
-    }
-
     public class WallEMovementCommand : WallECommand
     {
-        int _type = 4;
+        public COMMAND_TYPE type = COMMAND_TYPE.MOVEMENT;
         public WallEMovementCommandData data { get; set; }
-
-        public override int type
-        {
-            get { return _type; }
-        }
     }
 
     public class WallERegistrationData
@@ -32,12 +30,29 @@
     }
     public class WallERegistrationCommand : WallECommand
     {
-        int _type = 6;
+        public COMMAND_TYPE type = COMMAND_TYPE.REGISTRATION;
         public WallERegistrationData data { get; set; }
+    }
 
-        public override int type
+    public class WallEObstacleEventData
+    {
+        public string documentId;
+        public string imageUrl;
+        public decimal x;
+        public decimal y;
+        public string label;
+    }
+    public class WallEOBstacleEventCommand : WallECommand
+    {
+        public COMMAND_TYPE type
         {
-            get { return _type; }
+            get { return COMMAND_TYPE.OBSTACLE_EVENT; }
+        }
+        public WallEObstacleEventData data { get; set; }
+
+        public override string ToString()
+        {
+            return $"Obstacle Event: {data.label}, [{data.x}, {data.y}]";
         }
     }
 }

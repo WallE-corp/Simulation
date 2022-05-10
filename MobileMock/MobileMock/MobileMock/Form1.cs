@@ -28,13 +28,7 @@ namespace MobileMock
                 client = new SocketIO($"http://{address}");
                 client.OnConnected += OnConnected;
                 client.OnDisconnected += OnDisconnected;
-                client.On("message", response =>
-                {
-                    lstbxReceivedMessages.Invoke((MethodInvoker)delegate
-                    {
-                        lstbxReceivedMessages.Items.Add(response.GetValue<string>());
-                    });
-                });
+                client.On("message", OnMessageReceived);
 
             }
 
@@ -47,6 +41,35 @@ namespace MobileMock
                 await client.DisconnectAsync();
 
             }
+        }
+
+        private async void OnMessageReceived (SocketIOResponse response)
+        {
+            string jsonString = response.GetValue<string>();
+            var commadDef = new { type = 0 };
+            var command = JsonConvert.DeserializeAnonymousType(jsonString, commadDef);
+            if (command == null)
+            {
+                Console.WriteLine("Could not deserialize command", jsonString);
+                return;
+            }
+
+            dynamic parsedCommand;
+            switch ((COMMAND_TYPE)command.type)
+            {
+                case COMMAND_TYPE.OBSTACLE_EVENT:
+                    WallEOBstacleEventCommand obstacleEvent = JsonConvert.DeserializeObject<WallEOBstacleEventCommand>(jsonString);
+                    parsedCommand = obstacleEvent;
+                    break;
+                default:
+                    return;
+                    break;
+            }
+
+            lstbxReceivedMessages.Invoke((MethodInvoker)delegate
+            {
+                lstbxReceivedMessages.Items.Add(parsedCommand);
+            });
         }
 
         private WallEMovementCommand CreateMovementCommand(string movement, string action)

@@ -43,6 +43,7 @@
             this.lblObstacleEventData = new System.Windows.Forms.Label();
             this.pbxObstacle = new System.Windows.Forms.PictureBox();
             this.lstbxReceivedMessages = new System.Windows.Forms.ListBox();
+            this.btnStartNewMap = new System.Windows.Forms.Button();
             this.gbxControls.SuspendLayout();
             this.pnlMovementControls.SuspendLayout();
             this.gbxReceivedMessages.SuspendLayout();
@@ -77,6 +78,7 @@
             // 
             // gbxControls
             // 
+            this.gbxControls.Controls.Add(this.btnStartNewMap);
             this.gbxControls.Controls.Add(this.pnlMovementControls);
             this.gbxControls.Controls.Add(this.btnMode);
             this.gbxControls.Controls.Add(this.btnRegisterAsRemote);
@@ -199,6 +201,15 @@
             this.lstbxReceivedMessages.Size = new System.Drawing.Size(399, 259);
             this.lstbxReceivedMessages.TabIndex = 0;
             // 
+            // btnStartNewMap
+            // 
+            this.btnStartNewMap.Location = new System.Drawing.Point(9, 80);
+            this.btnStartNewMap.Name = "btnStartNewMap";
+            this.btnStartNewMap.Size = new System.Drawing.Size(125, 23);
+            this.btnStartNewMap.TabIndex = 3;
+            this.btnStartNewMap.Text = "Start new map";
+            this.btnStartNewMap.UseVisualStyleBackColor = true;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -241,5 +252,6 @@
         private Label lblObstacleEventData;
         private PictureBox pbxObstacle;
         private ListBox lstbxReceivedMessages;
+        private Button btnStartNewMap;
     }
 }
